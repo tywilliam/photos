@@ -17,6 +17,7 @@
     "node-emoji": "^1.8.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-router-dom": "^4.2.2",
     "spdy": "^3.4.7",
     "util": "^0.10.3",
     "winston": "^2.4.0"
