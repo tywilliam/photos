@@ -10,6 +10,7 @@
     "express-handlebars": "^3.0.0",
     "express-minify-html": "^0.12.0",
     "helmet": "^3.11.0",
+    "morgan": "^1.9.0",
     "spdy": "^3.4.7"
   },
   "devDependencies": {},
