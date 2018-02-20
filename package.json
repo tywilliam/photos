@@ -1,6 +1,7 @@
 {
   "author": "<domjt@me.com>",
   "dependencies": {
+    "cross-env": "^5.1.3",
     "express": "^4.16.2"
   },
   "devDependencies": {},
