@@ -1,0 +1,18 @@
+# Dependency directories
+node_modules
+
+# Yarn Integrity file
+.yarn-integrity
+
+# Self-signed SSL keys
+.ssl-keys
+
+# Logs
+.logs
+*.log
+
+# Build
+build
+
+# Local env variables
+.env
