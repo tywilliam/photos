@@ -1,0 +1,15 @@
+{
+  "author": "<domjt@me.com>",
+  "dependencies": {
+
+  },
+  "devDependencies": {
+
+  },
+  "license": "MIT",
+  "main": "index.js",
+  "name": "photos",
+  "private": false,
+  "repository": "https://github.com/domjtalbot/photos.git",
+  "version": "1.0.0"
+}
