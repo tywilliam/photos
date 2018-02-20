@@ -14,7 +14,8 @@
     "moment": "^2.20.1",
     "morgan": "^1.9.0",
     "node-emoji": "^1.8.1",
-    "spdy": "^3.4.7"
+    "spdy": "^3.4.7",
+    "winston": "^2.4.0"
   },
   "devDependencies": {},
   "license": "MIT",
