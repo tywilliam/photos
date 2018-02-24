@@ -104,6 +104,7 @@ routes(server);
 
 createServer(ssl, server).listen(PORT, HOST, () => {
   console.log('');
+  info(`:truck:  ${yellow(NODE_ENV)}`);
   info(`:truck:  ${yellow('HTTP2 server running...')}`);
   info(`:key:  Client Hash: ${yellow(hash)}`);
   console.log('');
