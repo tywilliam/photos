@@ -57,7 +57,7 @@
     "winston": "^2.3.1"
   },
   "devDependencies": {},
-  "license": "MIT",
+  "license": "CC-BY-4.0",
   "main": "index.js",
   "name": "photos",
   "private": false,
