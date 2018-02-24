@@ -18,36 +18,23 @@ import { hash } from './utils/webpack';
 import routes from './router/express';
 
 const {
+  CIPHERS,
   HOST = 'localhost',
   LOG = 'verbose',
   NODE_ENV = 'development',
   PORT = 8030,
+  SSLCERT,
+  SSLCA,
+  SSLKEY,
 } = process.env;
 const isDev = NODE_ENV === 'development';
 const { info, setLevel } = logger;
 const ssl = {
-  key: readFileSync('.ssl-keys/server.key'),
-  cert: readFileSync('.ssl-keys/server.crt'),
-  ca: readFileSync('.ssl-keys/server.csr'),
+  key: readFileSync(SSLKEY),
+  cert: readFileSync(SSLCERT),
+  ca: readFileSync(SSLCA),
   sdpy: {
-    ciphers: `
-      ECDHE-RSA-AES256-SHA384:
-      DHE-RSA-AES256-SHA384:
-      ECDHE-RSA-AES256-SHA256:
-      DHE-RSA-AES256-SHA256:
-      ECDHE-RSA-AES128-SHA256:
-      DHE-RSA-AES128-SHA256:
-      HIGH:
-      !aNULL:
-      !eNULL:
-      !EXPORT:
-      !DES:
-      !RC4:
-      !MD5:
-      !PSK:
-      !SRP:
-      !CAMELLIA
-    `,
+    ciphers: CIPHERS,
     honerCipherOrder: true,
   },
 };
