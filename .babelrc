@@ -1,0 +1,36 @@
+{
+  "presets": [
+    [
+      "env",
+      {
+        "targets": {
+          "node": 7
+        }
+      }
+    ],
+    "stage-0",
+    "react"
+  ],
+  "env": {
+    "client": {
+      "presets": [
+        [
+          "env",
+          {
+            "targets": {
+              "browsers": [
+                "last 4 versions",
+                "> 1%"
+              ]
+            }
+          }
+        ],
+        "stage-0",
+        "react"
+      ]
+    },
+    "test": {
+      "sourceMaps": "inline"
+    }
+  }
+}

@@ -1,6 +1,10 @@
 {
   "author": "<domjt@me.com>",
   "dependencies": {
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-preset-env": "^1.5.2",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
     "body-parser": "^1.18.2",
     "chalk": "^2.3.1",
     "compression": "^1.7.2",
