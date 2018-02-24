@@ -2796,9 +2796,9 @@ express-handlebars@^3.0.0:
     object.assign "^4.0.3"
     promise "^7.0.0"
 
-express-minify-html@^0.11.4:
-  version "0.11.6"
-  resolved "https://registry.yarnpkg.com/express-minify-html/-/express-minify-html-0.11.6.tgz#2512b398bd4884aafdf533dfba83133763f44b16"
+express-minify-html@^0.12.0:
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/express-minify-html/-/express-minify-html-0.12.0.tgz#43a9b5a0a04f1161a3e2367ae0b4af8bc7d68328"
   dependencies:
     html-minifier "3.5.7"
     lodash.merge "4.6.0"
