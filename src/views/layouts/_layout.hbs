@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{{title}}}</title>
+    {{#each cssassets}}
+      <link href="{{this.publicPath}}" rel="stylesheet" nonce="{{../hash}}"/>
+    {{/each}}
+
+    {{{ css }}}
+
+    <script nonce="{{{hash}}}">
+      {{{ manifest }}}
+    </script>
+  </head>
+  <body>
+    {{{ body }}}
+
+    {{#each jsassets}}
+      <script src="{{this.publicPath}}"></script>
+    {{/each}}
+  </body>
+</html>
