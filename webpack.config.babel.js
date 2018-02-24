@@ -171,12 +171,12 @@ const buildConfig = ({ entry, type = 'server' }) => {
       new Clean([isServer ? 'build/server' : 'build/client'], {
         root: __dirname,
       }),
-      new DefinePlugin({
-        'process.env': {
-          BROWSER: !isServer,
-          NODE_ENV: JSON.stringify(NODE_ENV),
-        },
-      }),
+      // new DefinePlugin({
+      //   'process.env': {
+      //     BROWSER: !isServer,
+      //     NODE_ENV: JSON.stringify(NODE_ENV),
+      //   },
+      // }),
       new ExtractText({
         allChunks: true,
         filename: isDev ? '../assets/style.css' : '../assets/[chunkhash].[hash].css',
