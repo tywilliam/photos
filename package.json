@@ -57,7 +57,12 @@
     "webpack-notifier": "^1.5.0",
     "winston": "^2.4.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@storybook/react": "^3.3.15",
+    "@storybook/addon-actions": "^3.3.15",
+    "@storybook/addon-links": "^3.3.15",
+    "@storybook/addons": "^3.3.15"
+  },
   "license": "CC-BY-4.0",
   "main": "index.js",
   "name": "photos",
@@ -71,7 +76,9 @@
     "ssc": "mkdir .ssl-keys && openssl genrsa -des3 -passout pass:x -out .ssl-keys/server.orig.key 2048 && openssl rsa -passin pass:x -in .ssl-keys/server.orig.key -out .ssl-keys/server.key && openssl req -new -key .ssl-keys/server.key -out .ssl-keys/server.csr && openssl x509 -req -days 365 -in .ssl-keys/server.csr -signkey .ssl-keys/server.key -out .ssl-keys/server.crt",
     "start": "node build/server/server.js",
     "start:dev": "nodemon --watch build build/server/server.js",
-    "start:prod": "cross-env NODE_ENV=production node build/server/server.js"
+    "start:prod": "cross-env NODE_ENV=production node build/server/server.js",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "version": "1.0.0"
 }
