@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const App = ({ className }) => (
   <div className={className}>
-    <p>Hello React server!</p>
+    <p>Hello Isomorphic React server!</p>
   </div>
 );
 
