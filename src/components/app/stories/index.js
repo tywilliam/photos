@@ -1,7 +1,5 @@
-import emoji from './emoji';
-import text from './text';
+import basic from './basic';
 
 export default [
-  emoji,
-  text,
+  basic,
 ];
