@@ -1,0 +1,32 @@
+language: node_js
+
+cache:
+  directories:
+  - node_modules
+
+notifications:
+  email: false
+
+node_js:
+  - 8
+  - 9
+
+jobs:
+  include:
+    - stage: Yarn install
+      script: yarn
+
+    - stage: Lint
+      node_js: 9
+      script: yarn lint
+
+    - stage: Test
+      script: yarn test
+
+    - stage: Production build
+      node_js: 9
+      script: yarn build:prod
+
+    - stage: Storybook build
+      node_js: 9
+      script: yarn build:storybook
