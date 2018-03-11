@@ -5,7 +5,7 @@ import readme from './README.md';
 import stories from './stories';
 
 
-const buttonStories = storiesOf('App', module);
+const buttonStories = storiesOf('HelloWorld', module);
 
 buttonStories.addDecorator(withReadme(readme));
 

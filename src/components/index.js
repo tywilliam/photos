@@ -1,10 +1,10 @@
 import App from './app';
-import Root from './root';
+import HelloWorld from './hello-world';
 
 export App from './app';
-export Root from './root';
+export HelloWorld from './hello-world';
 
 export default {
   App,
-  Root,
+  HelloWorld,
 };

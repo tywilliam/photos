@@ -2,10 +2,10 @@ import React from 'react';
 import { hydrate } from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 
-import { Root } from './components';
+import { App } from './components';
 
 hydrate((
   <BrowserRouter>
-    <Root />
+    <App />
   </BrowserRouter>
 ), document.getElementById('root'));

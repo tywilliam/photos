@@ -1,23 +1,18 @@
-import PropTypes from 'prop-types';
 import React from 'react';
-import styled from 'styled-components';
+import { Provider } from 'react-redux';
+import { Route, Switch } from 'react-router';
 
-const App = ({ className }) => (
-  <div className={className}>
-    <p>Hello Isomorphic React server!</p>
-  </div>
+import routes from '../../router/react';
+import Store from '../../store';
+
+import './style.scss';
+
+const App = () => (
+  <Provider store={Store}>
+    <Switch>
+      { routes.map(route => <Route {...route} key={route.name} />) }
+    </Switch>
+  </Provider>
 );
 
-App.propTypes = {
-  className: PropTypes.string,
-};
-
-App.defaultProps = {
-  className: '',
-};
-
-export default styled(App)`
-  p {
-    text-align: center;
-  }
-`;
+export { App as default };

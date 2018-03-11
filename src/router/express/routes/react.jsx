@@ -7,7 +7,7 @@ import { renderToString } from 'react-dom/server';
 import { matchPath, StaticRouter } from 'react-router-dom';
 import { ServerStyleSheet } from 'styled-components';
 
-import { Root } from '../../../components';
+import { App } from '../../../components';
 import routes from '../../../router/react';
 import { cssassets, jsassets, hash } from '../../../utils/webpack';
 
@@ -33,7 +33,7 @@ router.get('*', (req, res) => {
       context={context}
       location={req.url}
     >
-      <Root />
+      <App />
     </StaticRouter>,
   ));
   const css = stylesheet.getStyleTags();

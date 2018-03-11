@@ -1,12 +1,12 @@
 import React from 'react';
 
-import App from '../';
+import HelloWorld from '../';
 
 
 const name = 'Basic';
 
 const story = () => (
-  <App />
+  <HelloWorld />
 );
 
 export default {
