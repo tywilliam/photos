@@ -71,7 +71,7 @@
     "build:dev": "yarn build --watch",
     "build:prod": "cross-env NODE_ENV=production yarn build",
     "build:ssl": "mkdir .ssl-keys && openssl genrsa -des3 -passout pass:x -out .ssl-keys/server.orig.key 2048 && openssl rsa -passin pass:x -in .ssl-keys/server.orig.key -out .ssl-keys/server.key && openssl req -new -key .ssl-keys/server.key -out .ssl-keys/server.csr && openssl x509 -req -days 365 -in .ssl-keys/server.csr -signkey .ssl-keys/server.key -out .ssl-keys/server.crt",
-    "build:storybook": "build-storybook",
+    "build:storybook": "build-storybook --output-dir build/storybook",
     "build": "webpack --config webpack.config.babel.js",
     "lint": "eslint src",
     "start:dev": "nodemon --watch build build/server/server.js",
