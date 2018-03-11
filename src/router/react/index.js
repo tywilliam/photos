@@ -1,5 +1,3 @@
-import home from './routes/home';
+import routes from './routes';
 
-export default [
-  home,
-];
+export { routes as default };
