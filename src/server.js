@@ -30,9 +30,9 @@ const {
 const isDev = NODE_ENV === 'development';
 const { info, setLevel } = logger;
 const ssl = {
-  key: readFileSync(SSLKEY),
-  cert: readFileSync(SSLCERT),
   ca: readFileSync(SSLCA),
+  cert: readFileSync(SSLCERT),
+  key: readFileSync(SSLKEY),
   sdpy: {
     ciphers: CIPHERS,
     honerCipherOrder: true,
@@ -50,14 +50,15 @@ server.set('view engine', 'hbs');
 
 server.engine('hbs', handlebars({
   defaultLayout: '_layout',
+  extname: '.hbs',
   layoutsDir: resolve(viewsDir, 'layouts'),
   partialsDir: resolve(viewsDir, 'partials'),
-  extname: '.hbs',
 }));
 
 server.use(bodyParser.json({
   type: ['json', 'application/csp-report'],
 }));
+
 server.use(helmet({
   contentSecurityPolicy: {
     browserSniff: true,
@@ -77,8 +78,8 @@ if (!isDev) {
   server.use(compress({
     level: 9,
   }));
+
   server.use(minifyHTML({
-    override: true,
     htmlMinifier: {
       collapseInlineTagWhitespace: true,
       collapseWhitespace: true,
@@ -88,6 +89,7 @@ if (!isDev) {
       removeStyleLinkTypeAttributes: true,
       useShortDoctype: true,
     },
+    override: true,
   }));
 }
 
@@ -103,11 +105,11 @@ server.use(morgan('combined', {
 routes(server);
 
 createServer(ssl, server).listen(PORT, HOST, () => {
-  console.log('');
+  console.log(''); // eslint-disable-line no-console
   info(`:truck:  ${yellow(NODE_ENV)}`);
   info(`:truck:  ${yellow('HTTP2 server running...')}`);
   info(`:key:  Client Hash: ${yellow(hash)}`);
-  console.log('');
+  console.log(''); // eslint-disable-line no-console
   info(`:desktop_computer:  https://${HOST}:${PORT}`);
 
   console.log('\n\nPress CRTL+C to stop the server...\n'); // eslint-disable-line no-console
