@@ -6,15 +6,15 @@ import { resolve } from 'path';
 import { Logger, transports } from 'winston';
 import { inspect } from 'util';
 
-import { logger as config } from '../../../config';
+import { logger as config } from '../../config';
 
 const {
-    dateFormat,
-    fileLevel,
-    levels,
-    logDir,
-    logName,
-    timeFormat,
+  dateFormat,
+  fileLevel,
+  levels,
+  logDir,
+  logName,
+  timeFormat,
 } = config;
 
 const logDirPath = resolve(__dirname, logDir);
@@ -41,8 +41,8 @@ const formatter = function formatter(input, file = false) {
 
 const logger = new (Logger)({
   rewriters: [(level, message, meta) => (
-        Array.isArray(meta) ? { safeArray: meta } : meta
-    )],
+    Array.isArray(meta) ? { safeArray: meta } : meta
+  )],
   transports: [
     new (transports.Console)({
       align: false,

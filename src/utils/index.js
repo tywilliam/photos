@@ -1,6 +1,6 @@
-import logger from './components/logger';
+import logger from './logger';
 
-export logger from './components/logger';
+export logger from './logger';
 
 export default {
   logger,
