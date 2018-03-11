@@ -8,28 +8,12 @@ notifications:
   email: false
 
 node_js:
+  - 8
   - 9
 
-jobs:
-  include:
-    - stage: Yarn install
-      script: yarn
-
-    - stage: Lint
-      script: yarn lint
-
-    - stage: Test
-      script: yarn test
-
-    - stage: Production build
-      script: yarn build:prod
-
-    - stage: Storybook build
-      script: yarn build:storybook
-
-stages:
-  - Yarn install
-  - Lint
-  - Test
-  - Production build
-  - Storybook build
+script:
+  - yarn
+  - yarn lint
+  - yarn test
+  - yarn build:prod
+  - yarn build:storybook
