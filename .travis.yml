@@ -14,6 +14,8 @@ node_js:
 jobs:
   include:
     - stage: Yarn install
+      node_js: 8
+      node_js: 9
       script: yarn
 
     - stage: Lint
@@ -21,7 +23,8 @@ jobs:
       script: yarn lint
 
     - stage: Test
-      node_js: 8, 9
+      node_js: 8
+      node_js: 9
       script: yarn test
 
     - stage: Production build
