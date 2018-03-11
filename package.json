@@ -78,7 +78,8 @@
     "start:prod": "cross-env NODE_ENV=production node build/server/server.js",
     "start:storybook": "start-storybook -p 6006",
     "start": "node build/server/server.js",
-    "test": "jest"
+    "test": "jest",
+    "test:dev": "yarn test --watch"
   },
   "version": "1.0.0"
 }
