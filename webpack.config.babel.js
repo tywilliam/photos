@@ -17,7 +17,7 @@ const { NODE_ENV = 'development' } = process.env;
 const isDev = NODE_ENV === 'development';
 const { CommonsChunkPlugin } = optimize;
 
-console.log(yellow(emojify(`\n:building_construction:  ${NODE_ENV} build\n`)));
+console.log(yellow(emojify(`\n:building_construction:  ${NODE_ENV} build\n`))); // eslint-disable-line no-console
 
 const buildConfig = ({ entry, type = 'server' }) => {
   const isServer = type === 'server';
