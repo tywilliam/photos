@@ -21,6 +21,7 @@ jobs:
       script: yarn lint
 
     - stage: Test
+      node_js: 8, 9
       script: yarn test
 
     - stage: Production build
@@ -30,3 +31,10 @@ jobs:
     - stage: Storybook build
       node_js: 9
       script: yarn build:storybook
+
+stages:
+  - Yarn install
+  - Lint
+  - Test
+  - Production build
+  - Storybook build
