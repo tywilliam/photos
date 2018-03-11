@@ -6,18 +6,34 @@ import { resolve } from 'path';
 import { Logger, transports } from 'winston';
 import { inspect } from 'util';
 
-import { logger as config } from '../../config';
+import '../env';
 
 const {
-  dateFormat,
-  fileLevel,
-  levels,
-  logDir,
-  logName,
-  timeFormat,
-} = config;
+  LOGGER_DATEFORMAT = 'YYYY-MM-DD',
+  LOGGER_FILELEVEL = 'verbose',
+  LOGGER_LOGDIR = '../log',
+  LOGGER_LOGNAME = 'debug',
+  LOGGER_TIMEFORMAT = 'HH:mm:ss:SS',
+} = process.env;
 
-const logDirPath = resolve(__dirname, logDir);
+const levels = {
+  levels: {
+    error: 0,
+    warn: 1,
+    info: 2,
+    verbose: 3,
+    debug: 4,
+  },
+  colors: {
+    error: 'red',
+    warn: 'yellow',
+    info: 'grey',
+    verbose: 'magenta',
+    debug: 'grey',
+  },
+};
+
+const logDirPath = resolve(__dirname, LOGGER_LOGDIR);
 ensureDirSync(logDirPath);
 
 const formatter = function formatter(input, file = false) {
@@ -50,15 +66,15 @@ const logger = new (Logger)({
       humanReadableUnhandledException: true,
       levels,
       prettyPrint: true,
-      timestamp: () => moment().format(timeFormat),
+      timestamp: () => moment().format(LOGGER_TIMEFORMAT),
     }),
     new (transports.File)({
-      filename: `${logDirPath}/${logName}.log`,
+      filename: `${logDirPath}/${LOGGER_LOGNAME}.log`,
       formatter: args => formatter(args, true),
       json: false,
-      level: fileLevel,
+      level: LOGGER_FILELEVEL,
       levels,
-      timestamp: () => moment().format(`${dateFormat} ${timeFormat}`),
+      timestamp: () => moment().format(`${LOGGER_DATEFORMAT} ${LOGGER_TIMEFORMAT}`),
     }),
   ],
 });
