@@ -38,7 +38,7 @@ const ssl = {
     honerCipherOrder: true,
   },
 };
-const viewsDir = resolve(__dirname, 'views');
+const viewsDir = resolve(__dirname, 'router/express/views');
 
 setLevel(LOG);
 

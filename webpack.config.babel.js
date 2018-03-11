@@ -42,8 +42,8 @@ const buildConfig = ({ entry, type = 'server' }) => {
   const typePlugins = isServer ? [
     new Copy([
       {
-        from: resolve(__dirname, 'src/views'),
-        to: resolve(__dirname, 'build/server/views'),
+        from: resolve(__dirname, 'src/router/express/views'),
+        to: resolve(__dirname, 'build/server/router/express/views'),
       },
     ]),
   ] : [
