@@ -6,15 +6,13 @@ import { resolve } from 'path';
 import { Logger, transports } from 'winston';
 import { inspect } from 'util';
 
-import '../env';
-
-const {
-  LOGGER_DATEFORMAT = 'YYYY-MM-DD',
-  LOGGER_FILELEVEL = 'verbose',
-  LOGGER_LOGDIR = '../log',
-  LOGGER_LOGNAME = 'debug',
-  LOGGER_TIMEFORMAT = 'HH:mm:ss:SS',
-} = process.env;
+import {
+  LOGGER_DATEFORMAT,
+  LOGGER_FILELEVEL,
+  LOGGER_LOGDIR,
+  LOGGER_LOGNAME,
+  LOGGER_TIMEFORMAT,
+} from '../env';
 
 const levels = {
   levels: {

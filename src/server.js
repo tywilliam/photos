@@ -12,22 +12,21 @@ import { resolve } from 'path';
 import rfs from 'rotating-file-stream';
 import { createServer } from 'spdy';
 
-import './utils/env';
+import {
+  isDev,
+  CIPHERS,
+  HOST,
+  LOG,
+  NODE_ENV,
+  PORT,
+  SSLCERT,
+  SSLCA,
+  SSLKEY,
+} from './utils/env';
 import { logger } from './utils';
 import { hash } from './utils/webpack';
 import routes from './router/express';
 
-const {
-  CIPHERS,
-  HOST = 'localhost',
-  LOG = 'verbose',
-  NODE_ENV = 'development',
-  PORT = 8030,
-  SSLCERT,
-  SSLCA,
-  SSLKEY,
-} = process.env;
-const isDev = NODE_ENV === 'development';
 const { info, setLevel } = logger;
 const ssl = {
   ca: readFileSync(SSLCA),
