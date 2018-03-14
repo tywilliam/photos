@@ -13,7 +13,8 @@ node_js:
 
 script:
   - yarn
-  - yarn lint
+  - yarn test:lint
+  - yarn test:flow
   - yarn test
   - yarn build:prod
   - yarn build:storybook
