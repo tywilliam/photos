@@ -4,8 +4,9 @@ import { withReadme } from 'storybook-readme';
 import readme from './README.md';
 import stories from './stories';
 
-const buttonStories = storiesOf('Picture', module);
 
-buttonStories.addDecorator(withReadme(readme));
+const componentStories = storiesOf('Picture', module);
 
-stories.forEach(({ name, story }) => buttonStories.add(name, story));
+componentStories.addDecorator(withReadme(readme));
+
+stories.forEach(({ name, story }) => componentStories.add(name, story));
