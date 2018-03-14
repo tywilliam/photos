@@ -1,20 +1,18 @@
-import PropTypes from 'prop-types';
-import React from 'react';
+// @flow
+
+import * as React from 'react';
 import styled from 'styled-components';
 
-const App = ({ className }) => (
+
+type Props = {
+  className?: string,
+}
+
+const App = ({ className }: Props) => (
   <div className={className}>
     <p>Hello Isomorphic React!</p>
   </div>
 );
-
-App.propTypes = {
-  className: PropTypes.string,
-};
-
-App.defaultProps = {
-  className: '',
-};
 
 export default styled(App)`
   p {
