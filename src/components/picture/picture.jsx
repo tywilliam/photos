@@ -1,13 +1,22 @@
+// @flow
+
 import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
+
+type props = {
+  alt: string,
+  className: ?string,
+  src: string,
+  title: string,
+}
 
 const Picture = ({
   alt,
   className,
   src,
   title,
-}) => (
+}: props) => (
   <picture className={className}>
     {/* <source
       media="(min-width: 600px)"
@@ -28,19 +37,5 @@ const Picture = ({
     />
   </picture>
 );
-
-Picture.propTypes = {
-  alt: PropTypes.string.isRequired,
-  className: PropTypes.string,
-  src: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-};
-
-Picture.defaultProps = {
-  alt: '',
-  className: '',
-  src: '',
-  title: '',
-};
 
 export default styled(Picture)``;
