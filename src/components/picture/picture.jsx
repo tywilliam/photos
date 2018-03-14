@@ -1,12 +1,11 @@
 // @flow
 
-import PropTypes from 'prop-types';
-import React from 'react';
+import * as React from 'react';
 import styled from 'styled-components';
 
-type props = {
+type Props = {
   alt: string,
-  className: ?string,
+  className?: string,
   src: string,
   title: string,
 }
@@ -16,7 +15,7 @@ const Picture = ({
   className,
   src,
   title,
-}: props) => (
+}: Props) => (
   <picture className={className}>
     {/* <source
       media="(min-width: 600px)"
