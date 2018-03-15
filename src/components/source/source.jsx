@@ -5,20 +5,20 @@ import * as React from 'react';
 type Props = {
   media?: string,
   sizes?: string,
-  srcSet: string,
+  srcset: string,
   type?: string,
 }
 
 const Source = ({
   media,
   sizes,
-  srcSet,
+  srcset,
   type,
 }: Props) => (
   <source
     media={media}
     sizes={sizes}
-    srcSet={srcSet}
+    srcSet={srcset}
     type={type}
   />
 );
