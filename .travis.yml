@@ -14,6 +14,6 @@ script:
   - yarn
   - yarn test:lint
   - yarn test:flow
-  - yarn test
+  - yarn test:coverage
   - yarn build:prod
   - yarn build:storybook

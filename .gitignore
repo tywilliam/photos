@@ -14,5 +14,8 @@ node_modules
 # Build
 build
 
+# Test
+.coverage
+
 # Local env variables
 .env

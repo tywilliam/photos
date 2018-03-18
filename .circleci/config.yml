@@ -32,6 +32,6 @@ jobs:
       # run tests!
       - run: yarn test:lint
       - run: yarn test:flow
-      - run: yarn test
+      - run: yarn test:coverage
       - run: yarn build:prod
       - run: yarn build:storybook
