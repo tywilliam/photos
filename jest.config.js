@@ -5,6 +5,6 @@ module.exports = {
     '!src/**/stories/**',
     'src/**/*.{js,jsx}',
   ],
-  coverageDirectory: '.coverage',
+  coverageDirectory: 'coverage',
   coverageReporters: ['lcov', 'text-summary'],
 };
