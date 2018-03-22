@@ -1,1 +1,1 @@
-export default from './source';
+export * as source from './source';
