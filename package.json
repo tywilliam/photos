@@ -48,6 +48,8 @@
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.28.5",
     "cssnano": "^3.10.0",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
     "eslint": "^4.18.0",
     "eslint-config-dom": "^0.1.0-alpha.397a8e20",
     "eslint-loader": "^2.0.0",
