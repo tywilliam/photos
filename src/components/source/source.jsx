@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 
-type Props = {
+export type Props = {
   media?: string,
   sizes?: string,
   srcset: string,
