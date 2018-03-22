@@ -83,7 +83,6 @@
     "start:prod": "cross-env NODE_ENV=production node build/server/server.js",
     "start:storybook": "start-storybook -p 6006",
     "start": "node build/server/server.js",
-    "test:coverage": "yarn test --coverage && cat ./.coverage/lcov.info | codacy-coverage --accountToken $CODACY_ACCOUNT_TOKEN --username $CODACY_USERNAME --projectName $CODACY_PROJECT_NAME && rm -rf ./.coverage",
     "test:dev": "yarn test --watch",
     "test:flow": "flow",
     "test:lint": "eslint src",
