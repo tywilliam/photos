@@ -1,0 +1,20 @@
+version: "2"
+plugins:
+  eslint:
+    enabled: true
+  git-legal:
+    enabled: true
+  nodesecurity:
+    enabled: true
+exclude_patterns:
+  - ".babelrc"
+  - ".circleci/"
+  - ".codeclimate.yml"
+  - ".eslintrc"
+  - ".flowconfig"
+  - ".gitignore"
+  - ".yarn-cache/"
+  - ".yarnrc"
+  - "*.lock"
+  - "**/node_modules/"
+  - "jest.config.js"
