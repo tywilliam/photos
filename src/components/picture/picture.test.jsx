@@ -1,11 +1,10 @@
-import Enzyme, { render, shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+/* global render:false, shallow:false */
+
 import * as React from 'react';
 
 import Picture from './';
 import Source from '../source';
 
-Enzyme.configure({ adapter: new Adapter() });
 
 describe('<Picture />', () => {
   it('always renders one <img /> tag', () => {
