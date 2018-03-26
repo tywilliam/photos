@@ -18,6 +18,7 @@ export const {
   SSLCA = '.ssl-keys/server.csr',
   SSLCERT = '.ssl-keys/server.crt',
   SSLKEY = '.ssl-keys/server.key',
+  WEBPACK_STATS_PATH = '../client-build-stats.json',
 } = process.env;
 
 export const isDev = NODE_ENV === 'development';

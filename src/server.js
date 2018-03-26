@@ -24,8 +24,9 @@ import {
   SSLKEY,
 } from './utils/env';
 import { logger } from './utils';
-import { hash } from './utils/webpack';
 import routes from './router/express';
+import { hash } from './utils/webpack-stats';
+
 
 const { info, setLevel } = logger;
 const ssl = {

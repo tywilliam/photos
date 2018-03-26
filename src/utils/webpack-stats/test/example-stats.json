@@ -1,0 +1,37 @@
+{
+  "errors": [],
+  "warnings": [],
+  "hash": "adfb513859874d7a9711",
+  "publicPath": "/assets",
+  "assetsByChunkName": {
+    "vendor": "vendor.js",
+    "app": ["app.js", "../assets/style.css"],
+    "manifest": "manifest.js"
+  },
+  "assets": [{
+    "name": "vendor.js",
+    "size": 2676783,
+    "chunks": [0],
+    "chunkNames": ["vendor"],
+    "emitted": true
+  }, {
+    "name": "app.js",
+    "size": 20065,
+    "chunks": [1],
+    "chunkNames": ["app"],
+    "emitted": true
+  }, {
+    "name": "manifest.js",
+    "size": 9170,
+    "chunks": [2],
+    "chunkNames": ["manifest"],
+    "emitted": true
+  }, {
+    "name": "../assets/style.css",
+    "size": 11662,
+    "chunks": [1],
+    "chunkNames": ["app"],
+    "emitted": true
+  }],
+  "filteredAssets": 1
+}

@@ -1,13 +1,13 @@
 import env from './env';
 import logger from './logger';
-import webpack from './webpack';
+import webpackStats from './webpack-stats';
 
 export env from './env';
 export logger from './logger';
-export webpack from './webpack';
+export webpackStats from './webpack-stats';
 
 export default {
   env,
   logger,
-  webpack,
+  webpackStats,
 };

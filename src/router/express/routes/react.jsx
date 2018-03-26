@@ -1,3 +1,5 @@
+// @flow
+
 import { Router } from 'express';
 import { readFileSync } from 'fs';
 import { NOT_FOUND, OK } from 'http-status-codes';
@@ -9,7 +11,8 @@ import { ServerStyleSheet } from 'styled-components';
 
 import { App } from '../../../components';
 import routes from '../../../router/react';
-import { cssassets, jsassets, hash } from '../../../utils/webpack';
+import { cssAssets, hash, jsAssets } from '../../../utils/webpack-stats';
+
 
 const router = new Router();
 
@@ -38,12 +41,12 @@ router.get('*', (req, res) => {
   ));
   const css = stylesheet.getStyleTags();
 
-  const manifestPath = join(__dirname, jsassets.find(({ name }) => name === 'manifest').localPath);
+  const manifestPath: string = join(__dirname, jsAssets.find(({ name }) => name === 'manifest').localPath);
   const manifest = readFileSync(manifestPath);
 
   res.status(OK).render('react', {
-    jsassets: jsassets.filter(({ name }) => name !== 'manifest'),
-    cssassets,
+    jsassets: jsAssets.filter(({ name }) => name !== 'manifest'),
+    cssassets: cssAssets,
     css,
     hash,
     manifest,
