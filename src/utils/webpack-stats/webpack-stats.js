@@ -43,15 +43,15 @@ type WebpackStats = {
   warnings: string[],
 };
 
-/// Get Webpack build stats from webpack generated stats file
-///
-/// @param {string} path - Path to webpack stats json file
-/// @returns Formatted webpack webpack stats
-/// @example
-/// import { resolve } from 'path';
-///
-/// const path = resolve(__dirname, 'webpack-build-stats.json');
-/// const stats = buildWebpackBuildStats(path);
+// Get Webpack build stats from webpack generated stats file
+//
+// @param {string} path - Path to webpack stats json file
+// @returns Formatted webpack webpack stats
+// @example
+// import { resolve } from 'path';
+//
+// const path = resolve(__dirname, 'webpack-build-stats.json');
+// const stats = buildWebpackBuildStats(path);
 export function getWebpackBuildStats(path: string): Build {
   const build: WebpackStats = readJsonSync(path);
 
@@ -69,8 +69,8 @@ export function getWebpackBuildStats(path: string): Build {
     publicPath: join(publicPath, name),
     size,
   }));
-  const cssAssets = assets.filter(({ publicPath }) => publicPath.endsWith('.css'));
-  const jsAssets = assets.filter(({ publicPath }) => publicPath.endsWith('.js'));
+  const cssAssets = assets.filter(asset => asset.publicPath.endsWith('.css'));
+  const jsAssets = assets.filter(asset => asset.publicPath.endsWith('.js'));
 
   return {
     assets,
