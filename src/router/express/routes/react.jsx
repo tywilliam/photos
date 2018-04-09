@@ -19,7 +19,7 @@ const router = new Router();
 router.get('*', (req, res) => {
   const match = routes.reduce((acc, route) => (
     matchPath(req.url, route, {
-      exact: route.extact || false,
+      exact: route.extact,
     }) || acc
   ), null);
 
