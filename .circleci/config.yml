@@ -1,48 +1,170 @@
 version: 2
+
 jobs:
+  # Build production
   build:
     docker:
-      - image: circleci/node:9.6
-
-    working_directory: ~/repo
-
+      - image: circleci/node:9
     steps:
-      - checkout
-
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "package.json" }}
-          - v1-dependencies-
-
+            - repo-cache-
+            - repo-cache-{{ .Branch }}-
+            - repo-cache-{{ .Branch }}-{{ .Revision }}
+            - yarn-cache-
+            - yarn-cache-{{ .Branch }}-
+            - yarn-cache-{{ .Branch }}-{{ .Revision }}-{{ checksum "yarn.lock" }}
       - run:
-          name: Install yarn dependencies
-          command: yarn install
+          command: yarn build:prod
+          name: Build production
+    working_directory: ~/repo
 
+  # Build storybook
+  build-storybook:
+    docker:
+      - image: circleci/node:9
+    steps:
+      - restore_cache:
+          keys:
+            - repo-cache-
+            - repo-cache-{{ .Branch }}-
+            - repo-cache-{{ .Branch }}-{{ .Revision }}
+            - yarn-cache-
+            - yarn-cache-{{ .Branch }}-
+            - yarn-cache-{{ .Branch }}-{{ .Revision }}-{{ checksum "yarn.lock" }}
+      - run:
+          command: yarn build:storybook
+          name: Build storybook
+    working_directory: ~/repo
+
+  # Checkout repo
+  checkout:
+    docker:
+      - image: circleci/node:9
+    steps:
+      - checkout
       - save_cache:
+          key: repo-cache-{{ .Branch }}-{{ .Revision }}
           paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
+            - ".git"
+            - "~/repo"
+          name: Saving repo cache
+    working_directory: ~/repo
 
+  # Install dependencies
+  dependencies:
+    docker:
+      - image: circleci/node:9
+    steps:
+      - restore_cache:
+          keys:
+            - repo-cache-
+            - repo-cache-{{ .Branch }}-
+            - repo-cache-{{ .Branch }}-{{ .Revision }}
+            - yarn-cache-
+            - yarn-cache-{{ .Branch }}-
+            - yarn-cache-{{ .Branch }}-{{ .Revision }}-{{ checksum "yarn.lock" }}
+      - run:
+          command: yarn install
+          name: Install yarn dependencies
+      - save_cache:
+          key: yarn-cache-{{ .Branch }}-{{ .Revision }}-{{ checksum "yarn.lock" }}
+          paths:
+            - "node_modules"
+          name: Saving yarn cache
+    working_directory: ~/repo
+
+  # Run tests
+  test:
+    docker:
+      - image: circleci/node:9
+    steps:
+      - restore_cache:
+          keys:
+            - repo-cache-
+            - repo-cache-{{ .Branch }}-
+            - repo-cache-{{ .Branch }}-{{ .Revision }}
+            - yarn-cache-
+            - yarn-cache-{{ .Branch }}-
+            - yarn-cache-{{ .Branch }}-{{ .Revision }}-{{ checksum "yarn.lock" }}
       - run:
           name: Setup Code Climate test-reporter
           command: |
             curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
             chmod +x ./cc-test-reporter
       - run:
-          name: Lint
-          command: yarn test:lint
+          command: yarn test
+          name: Jest tests
+    working_directory: ~/repo
+
+  # Flowtype
+  test-flow:
+    docker:
+      - image: circleci/node:9
+    steps:
+      - restore_cache:
+          keys:
+            - repo-cache-
+            - repo-cache-{{ .Branch }}-
+            - repo-cache-{{ .Branch }}-{{ .Revision }}
+            - yarn-cache-
+            - yarn-cache-{{ .Branch }}-
+            - yarn-cache-{{ .Branch }}-{{ .Revision }}-{{ checksum "yarn.lock" }}
       - run:
-          name: Flow
           command: yarn test:flow
+          name: Lint
+    working_directory: ~/repo
+
+  # Lint
+  test-lint:
+    docker:
+      - image: circleci/node:9
+    steps:
+      - restore_cache:
+          keys:
+            - repo-cache-
+            - repo-cache-{{ .Branch }}-
+            - repo-cache-{{ .Branch }}-{{ .Revision }}
+            - yarn-cache-
+            - yarn-cache-{{ .Branch }}-
+            - yarn-cache-{{ .Branch }}-{{ .Revision }}-{{ checksum "yarn.lock" }}
       - run:
-          name: Test
-          command: |
-            ./cc-test-reporter before-build
-            yarn test
-            ./cc-test-reporter after-build --coverage-input-type lcov --exit-code $?
-      - run:
-          name: Build App
-          command: yarn build:prod
-      - run:
-          name: Build Storybook
-          command: yarn build:storybook
+          command: yarn test:lint
+          name: Lint
+    working_directory: ~/repo
+
+
+workflows:
+  version: 2
+  build-and-test:
+    jobs:
+      - checkout
+      - dependencies
+          requires:
+            - checkout
+      - test
+          requires:
+            - checkout
+            - dependencies
+      - test-lint
+          requires:
+            - checkout
+            - dependencies
+      - test-flow
+          requires:
+            - checkout
+            - dependencies
+      - build
+          requires:
+            - checkout
+            - dependencies
+            - test
+            - test-lint
+            - test-flow
+      - build-storybook
+          requires:
+            - checkout
+            - dependencies
+            - test
+            - test-lint
+            - test-flow
