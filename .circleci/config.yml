@@ -70,7 +70,7 @@ jobs:
       - save_cache:
           key: yarn-cache-{{ .Branch }}-{{ .Revision }}-{{ checksum "yarn.lock" }}
           paths:
-            - "node_modules"
+            - "~/repo/node_modules"
           name: Saving yarn cache
     working_directory: ~/repo
 
