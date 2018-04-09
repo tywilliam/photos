@@ -139,29 +139,29 @@ workflows:
   build-and-test:
     jobs:
       - checkout
-      - dependencies
+      - dependencies:
           requires:
             - checkout
-      - test
-          requires:
-            - checkout
-            - dependencies
-      - test-lint
+      - test:
           requires:
             - checkout
             - dependencies
-      - test-flow
+      - test-lint:
           requires:
             - checkout
             - dependencies
-      - build
+      - test-flow:
+          requires:
+            - checkout
+            - dependencies
+      - build:
           requires:
             - checkout
             - dependencies
             - test
             - test-lint
             - test-flow
-      - build-storybook
+      - build-storybook:
           requires:
             - checkout
             - dependencies
