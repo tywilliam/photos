@@ -8,20 +8,20 @@ jobs:
     steps:
       - restore_cache:
           keys:
-            - repo-cache-
-            - repo-cache-{{ .Branch }}-
             - repo-cache-{{ .Branch }}-{{ .Revision }}
-            - yarn-cache-
-            - yarn-cache-{{ .Branch }}-
-            - yarn-cache-{{ .Branch }}-{{ .Revision }}-{{ checksum "yarn.lock" }}
+            - repo-cache-{{ .Branch }}-
+            - repo-cache-
+          name: Restore repo cache
       - checkout
-      - run:
-          command: yarn
-          name: Install yarn dependencies
+      - restore_cache:
+          keys:
+            - yarn-cache-{{ .Branch }}-{{ .Revision }}-{{ checksum "yarn.lock" }}
+            - yarn-cache-{{ .Branch }}-
+            - yarn-cache-
+          name: Restore yarn cache
       - run:
           command: yarn build:prod
           name: Build production
-    working_directory: ~/repo
 
   # Build storybook
   build-storybook:
@@ -30,20 +30,20 @@ jobs:
     steps:
       - restore_cache:
           keys:
-            - repo-cache-
-            - repo-cache-{{ .Branch }}-
             - repo-cache-{{ .Branch }}-{{ .Revision }}
-            - yarn-cache-
-            - yarn-cache-{{ .Branch }}-
-            - yarn-cache-{{ .Branch }}-{{ .Revision }}-{{ checksum "yarn.lock" }}
+            - repo-cache-{{ .Branch }}-
+            - repo-cache-
+          name: Restore repo cache
       - checkout
-      - run:
-          command: yarn
-          name: Install yarn dependencies
+      - restore_cache:
+          keys:
+            - yarn-cache-{{ .Branch }}-{{ .Revision }}-{{ checksum "yarn.lock" }}
+            - yarn-cache-{{ .Branch }}-
+            - yarn-cache-
+          name: Restore yarn cache
       - run:
           command: yarn build:storybook
           name: Build storybook
-    working_directory: ~/repo
 
   # Checkout repo
   checkout:
@@ -56,7 +56,6 @@ jobs:
           paths:
             - .git
           name: Saving repo cache
-    working_directory: ~/repo
 
   # Install dependencies
   dependencies:
@@ -65,13 +64,17 @@ jobs:
     steps:
       - restore_cache:
           keys:
-            - repo-cache-
-            - repo-cache-{{ .Branch }}-
             - repo-cache-{{ .Branch }}-{{ .Revision }}
-            - yarn-cache-
-            - yarn-cache-{{ .Branch }}-
-            - yarn-cache-{{ .Branch }}-{{ .Revision }}-{{ checksum "yarn.lock" }}
+            - repo-cache-{{ .Branch }}-
+            - repo-cache-
+          name: Restore repo cache
       - checkout
+      - restore_cache:
+          keys:
+            - yarn-cache-{{ .Branch }}-{{ .Revision }}-{{ checksum "yarn.lock" }}
+            - yarn-cache-{{ .Branch }}-
+            - yarn-cache-
+          name: Restore yarn cache
       - run:
           command: yarn install
           name: Install yarn dependencies
@@ -80,7 +83,6 @@ jobs:
           paths:
             - node_modules
           name: Saving yarn cache
-    working_directory: ~/repo
 
   # Run tests
   test:
@@ -89,16 +91,17 @@ jobs:
     steps:
       - restore_cache:
           keys:
-            - repo-cache-
-            - repo-cache-{{ .Branch }}-
             - repo-cache-{{ .Branch }}-{{ .Revision }}
-            - yarn-cache-
-            - yarn-cache-{{ .Branch }}-
-            - yarn-cache-{{ .Branch }}-{{ .Revision }}-{{ checksum "yarn.lock" }}
+            - repo-cache-{{ .Branch }}-
+            - repo-cache-
+          name: Restore repo cache
       - checkout
-      - run:
-          command: yarn
-          name: Install yarn dependencies
+      - restore_cache:
+          keys:
+            - yarn-cache-{{ .Branch }}-{{ .Revision }}-{{ checksum "yarn.lock" }}
+            - yarn-cache-{{ .Branch }}-
+            - yarn-cache-
+          name: Restore yarn cache
       - run:
           name: Setup Code Climate test-reporter
           command: |
@@ -107,7 +110,6 @@ jobs:
       - run:
           command: yarn test
           name: Jest tests
-    working_directory: ~/repo
 
   # Flowtype
   test-flow:
@@ -116,20 +118,20 @@ jobs:
     steps:
       - restore_cache:
           keys:
-            - repo-cache-
-            - repo-cache-{{ .Branch }}-
             - repo-cache-{{ .Branch }}-{{ .Revision }}
-            - yarn-cache-
-            - yarn-cache-{{ .Branch }}-
-            - yarn-cache-{{ .Branch }}-{{ .Revision }}-{{ checksum "yarn.lock" }}
+            - repo-cache-{{ .Branch }}-
+            - repo-cache-
+          name: Restore repo cache
       - checkout
-      - run:
-          command: yarn
-          name: Install yarn dependencies
+      - restore_cache:
+          keys:
+            - yarn-cache-{{ .Branch }}-{{ .Revision }}-{{ checksum "yarn.lock" }}
+            - yarn-cache-{{ .Branch }}-
+            - yarn-cache-
+          name: Restore yarn cache
       - run:
           command: yarn test:flow
           name: Lint
-    working_directory: ~/repo
 
   # Lint
   test-lint:
@@ -138,43 +140,61 @@ jobs:
     steps:
       - restore_cache:
           keys:
-            - repo-cache-
-            - repo-cache-{{ .Branch }}-
             - repo-cache-{{ .Branch }}-{{ .Revision }}
-            - yarn-cache-
-            - yarn-cache-{{ .Branch }}-
-            - yarn-cache-{{ .Branch }}-{{ .Revision }}-{{ checksum "yarn.lock" }}
+            - repo-cache-{{ .Branch }}-
+            - repo-cache-
+          name: Restore repo cache
       - checkout
-      - run:
-          command: yarn
-          name: Install yarn dependencies
+      - restore_cache:
+          keys:
+            - yarn-cache-{{ .Branch }}-{{ .Revision }}-{{ checksum "yarn.lock" }}
+            - yarn-cache-{{ .Branch }}-
+            - yarn-cache-
+          name: Restore yarn cache
       - run:
           command: yarn test:lint
           name: Lint
-    working_directory: ~/repo
 
 
 workflows:
   version: 2
-  build-and-test:
+  build-test:
     jobs:
-      - checkout
+      - checkout:
+          filters:
+            tags:
+              ignore: /^v.*/
       - dependencies:
+          filters:
+            tags:
+              ignore: /^v.*/
           requires:
             - checkout
       - test:
+          filters:
+            tags:
+              ignore: /^v.*/
           requires:
             - checkout
             - dependencies
       - test-lint:
+          filters:
+            tags:
+              ignore: /^v.*/
           requires:
             - checkout
             - dependencies
       - test-flow:
+          filters:
+            tags:
+              ignore: /^v.*/
           requires:
             - checkout
             - dependencies
       - build:
+          filters:
+            tags:
+              ignore: /^v.*/
           requires:
             - checkout
             - dependencies
@@ -182,6 +202,76 @@ workflows:
             - test-lint
             - test-flow
       - build-storybook:
+          filters:
+            tags:
+              ignore: /^v.*/
+          requires:
+            - checkout
+            - dependencies
+            - test
+            - test-lint
+            - test-flow
+  build-test-deploy:
+    jobs:
+      - checkout:
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v.*/
+      - dependencies:
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v.*/
+          requires:
+            - checkout
+      - test:
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v.*/
+          requires:
+            - checkout
+            - dependencies
+      - test-lint:
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v.*/
+          requires:
+            - checkout
+            - dependencies
+      - test-flow:
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v.*/
+          requires:
+            - checkout
+            - dependencies
+      - build:
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v.*/
+          requires:
+            - checkout
+            - dependencies
+            - test
+            - test-lint
+            - test-flow
+      - build-storybook:
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v.*/
           requires:
             - checkout
             - dependencies
