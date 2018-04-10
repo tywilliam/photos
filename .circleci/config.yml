@@ -14,6 +14,7 @@ jobs:
             - yarn-cache-
             - yarn-cache-{{ .Branch }}-
             - yarn-cache-{{ .Branch }}-{{ .Revision }}-{{ checksum "yarn.lock" }}
+      - checkout
       - run:
           command: yarn build:prod
           name: Build production
@@ -32,6 +33,7 @@ jobs:
             - yarn-cache-
             - yarn-cache-{{ .Branch }}-
             - yarn-cache-{{ .Branch }}-{{ .Revision }}-{{ checksum "yarn.lock" }}
+      - checkout
       - run:
           command: yarn build:storybook
           name: Build storybook
@@ -46,8 +48,7 @@ jobs:
       - save_cache:
           key: repo-cache-{{ .Branch }}-{{ .Revision }}
           paths:
-            - ".git"
-            - "~/repo"
+            - .git
           name: Saving repo cache
     working_directory: ~/repo
 
@@ -64,13 +65,14 @@ jobs:
             - yarn-cache-
             - yarn-cache-{{ .Branch }}-
             - yarn-cache-{{ .Branch }}-{{ .Revision }}-{{ checksum "yarn.lock" }}
+      - checkout
       - run:
           command: yarn install
           name: Install yarn dependencies
       - save_cache:
           key: yarn-cache-{{ .Branch }}-{{ .Revision }}-{{ checksum "yarn.lock" }}
           paths:
-            - "~/repo/node_modules"
+            - node_modules
           name: Saving yarn cache
     working_directory: ~/repo
 
@@ -87,6 +89,7 @@ jobs:
             - yarn-cache-
             - yarn-cache-{{ .Branch }}-
             - yarn-cache-{{ .Branch }}-{{ .Revision }}-{{ checksum "yarn.lock" }}
+      - checkout
       - run:
           name: Setup Code Climate test-reporter
           command: |
@@ -110,6 +113,7 @@ jobs:
             - yarn-cache-
             - yarn-cache-{{ .Branch }}-
             - yarn-cache-{{ .Branch }}-{{ .Revision }}-{{ checksum "yarn.lock" }}
+      - checkout
       - run:
           command: yarn test:flow
           name: Lint
@@ -128,6 +132,7 @@ jobs:
             - yarn-cache-
             - yarn-cache-{{ .Branch }}-
             - yarn-cache-{{ .Branch }}-{{ .Revision }}-{{ checksum "yarn.lock" }}
+      - checkout
       - run:
           command: yarn test:lint
           name: Lint
