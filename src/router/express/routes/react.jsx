@@ -16,15 +16,17 @@ import { cssAssets, hash, jsAssets } from '../../../utils/webpack-stats';
 
 const router = new Router();
 
-router.get('*', ({ url }, { status }) => {
-  const match = routes.reduce((acc, route) => (
-    matchPath(url, route, {
-      exact: route.extact,
+// $FlowFixMe
+router.get('*', ({ url }, res) => {
+  const match = routes.reduce((acc, { exact, path }) => (
+    matchPath(url, {
+      exact,
+      path,
     }) || acc
   ), null);
 
   if (!match) {
-    status(NOT_FOUND).send('Not found');
+    res.status(NOT_FOUND).send('Not found');
     return;
   }
 
@@ -44,7 +46,7 @@ router.get('*', ({ url }, { status }) => {
   const manifestPath: string = join(__dirname, jsAssets.find(({ name }) => name === 'manifest').localPath);
   const manifest = readFileSync(manifestPath);
 
-  status(OK).render('react', {
+  res.status(OK).render('react', {
     jsassets: jsAssets.filter(({ name }) => name !== 'manifest'),
     cssassets: cssAssets,
     css,
