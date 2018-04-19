@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { HelloWorld } from '../../../components';
+import { Home } from '../../../containers';
 
 export default {
-  render: () => <HelloWorld />,
+  render: () => <Home />,
   exact: true,
   name: 'home',
   path: '/',

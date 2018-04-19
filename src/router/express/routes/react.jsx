@@ -9,7 +9,7 @@ import { renderToString } from 'react-dom/server';
 import { matchPath, StaticRouter } from 'react-router-dom';
 import { ServerStyleSheet } from 'styled-components';
 
-import { App } from '../../../components';
+import { Root } from '../../../containers';
 import routes from '../../../router/react';
 import { cssAssets, hash, jsAssets } from '../../../utils/webpack-stats';
 
@@ -38,7 +38,7 @@ router.get('*', ({ url }, res) => {
       context={context}
       location={url}
     >
-      <App />
+      <Root />
     </StaticRouter>,
   ));
   const css = stylesheet.getStyleTags();
