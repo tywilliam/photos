@@ -2,7 +2,7 @@
   "author": "<domjt@me.com>",
   "dependencies": {
     "body-parser": "^1.17.2",
-    "chalk": "^2.1.0",
+    "chalk": "^2.4.0",
     "compression": "^1.7.0",
     "cross-env": "^5.0.5",
     "dotenv": "^5.0.0",
