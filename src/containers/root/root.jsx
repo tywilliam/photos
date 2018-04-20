@@ -7,7 +7,7 @@ import Store from '../../store';
 
 import './style.scss';
 
-const App = () => (
+const Root = () => (
   <Provider store={Store}>
     <Switch>
       { routes.map(route => <Route {...route} key={route.name} />) }
@@ -15,4 +15,4 @@ const App = () => (
   </Provider>
 );
 
-export { App as default };
+export { Root as default };
