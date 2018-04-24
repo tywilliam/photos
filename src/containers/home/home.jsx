@@ -3,7 +3,7 @@ import React, { Fragment } from 'react';
 
 const Home = () => (
   <Fragment>
-    <p>Home</p>
+    <h1>Home</h1>
   </Fragment>
 );
 
