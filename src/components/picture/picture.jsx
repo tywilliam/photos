@@ -31,12 +31,9 @@ const Picture = ({
 );
 
 export default styled(Picture)`
-  display: block;
-
   img {
-    display: block;
     height: 100%;
     object-fit: contain;
-    width: 100%
+    width: 100%;
   }
 `;

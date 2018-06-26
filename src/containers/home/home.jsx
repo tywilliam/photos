@@ -33,16 +33,19 @@ const Home = ({ className }) => (
 );
 
 export default styled(Home)`
-  display: inline-flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-gap: 100px 20px;
+  grid-template-columns: 20px 1fr 10fr 1fr 20px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1200px;
 
   ${Picture} {
-    flex-basis: 100%;
-    max-height: 75vh;
+    grid-column-end: span 1;
+    grid-column-start: 3;
 
-    &:not(:first-of-type) {
-      margin-top: 60px;
+    img {
+      max-height: 75vh;
     }
   }
 `;
