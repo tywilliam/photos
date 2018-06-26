@@ -4,18 +4,18 @@ import Picture from '../';
 import Source from '../../source';
 
 
-const name = 'Responsive';
+const name = 'Responsive - no art direction';
 
 const story = () => (
   <Picture
     alt="This is alt text"
-    src="https://c1.staticflickr.com/5/4705/26691259268_9123358b35_n.jpg"
+    src="https://placeimg.com/200/200/nature"
     title="This is a title"
   >
     <Source
-      media="(min-width: 800px)"
-      sizes="80vw"
-      srcset="https://c1.staticflickr.com/5/4705/26691259268_9123358b35_c.jpg"
+      srcset="https://placeimg.com/400/400/nature 400w,
+              https://placeimg.com/600/600/nature 600w,
+              https://placeimg.com/800/800/nature 800w"
       type="image/jpeg"
     />
   </Picture>

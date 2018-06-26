@@ -1,7 +1,9 @@
 import basic from './basic';
-import withSource from './with-source';
+import responsiveArtDirection from './responsive-art-direction';
+import responsiveNoArtDirection from './responsive-no-art-direction';
 
 export default [
   basic,
-  withSource,
+  responsiveArtDirection,
+  responsiveNoArtDirection,
 ];
