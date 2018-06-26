@@ -64,7 +64,7 @@ server.use(helmet({
     browserSniff: true,
     directives: {
       defaultSrc: ["'self'"],
-      imgSrc: ["'self'", 'data:', '*.staticflickr.com', 'photos.smugmug.com'],
+      imgSrc: ["'self'", 'data:', 'placeimg.com'],
       reportUri: '/csp/violation',
       scriptSrc: ["'self'", `'nonce-${hash}'`],
       styleSrc: ["'self'", "'unsafe-inline'"],
