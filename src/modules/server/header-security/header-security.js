@@ -8,12 +8,13 @@ export default function headerSecurity(server) {
   server.use(bodyParser.json({
     type: ['json', 'application/csp-report'],
   }));
+
   server.use(helmet({
     contentSecurityPolicy: {
       browserSniff: true,
       directives: {
         defaultSrc: ["'self'"],
-        imgSrc: ["'self'", 'data:', 'placeimg.com'],
+        imgSrc: ["'self'", 'placeimg.com'],
         reportUri: '/csp/violation',
         scriptSrc: ["'self'", `'nonce-${hash}'`],
         styleSrc: ["'self'", "'unsafe-inline'"],
