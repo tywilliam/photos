@@ -5,7 +5,9 @@ import rfs from 'rotating-file-stream';
 
 export default function requestLogger(server) {
   const logPath = resolve(__dirname, '../log');
+
   ensureDirSync(logPath);
+
   server.use(morgan('combined', {
     stream: rfs('access.log', {
       interval: '1d',
