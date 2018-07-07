@@ -39,11 +39,11 @@ const ssl = {
 const viewsDir = resolve(__dirname, 'router/express/views');
 
 setLevel(LOG);
-
 templateEngine(server, viewsDir);
 headerSecurity(server);
 requestLogger(server);
 routes(server);
+
 server.set('port', PORT);
 
 if (!isDev) {
