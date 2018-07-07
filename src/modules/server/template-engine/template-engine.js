@@ -4,6 +4,8 @@ import { resolve } from 'path';
 export default function templateEngine(server, viewsDir) {
   server.set('view engine', 'hbs');
 
+  server.set('views', viewsDir);
+
   server.engine('hbs', handlebars({
     defaultLayout: '_layout',
     extname: '.hbs',

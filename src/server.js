@@ -41,7 +41,6 @@ const viewsDir = resolve(__dirname, 'router/express/views');
 setLevel(LOG);
 
 server.set('port', PORT);
-server.set('views', viewsDir);
 
 templateEngine(server, viewsDir);
 headerSecurity(server);
