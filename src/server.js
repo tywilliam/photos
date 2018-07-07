@@ -40,12 +40,11 @@ const viewsDir = resolve(__dirname, 'router/express/views');
 
 setLevel(LOG);
 
-server.set('port', PORT);
-
 templateEngine(server, viewsDir);
 headerSecurity(server);
 requestLogger(server);
 routes(server);
+server.set('port', PORT);
 
 if (!isDev) {
   compression(server);
