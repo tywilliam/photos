@@ -15,6 +15,8 @@ export default function compression(server) {
       removeScriptTypeAttributes: true,
       removeStyleLinkTypeAttributes: true,
       useShortDoctype: true,
+      minifyURLs: true,
+      useShortDoctype: true,
     },
     override: true,
   }));
