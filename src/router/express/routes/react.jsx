@@ -2,7 +2,7 @@
 
 import { Router } from 'express';
 import { readFileSync } from 'fs';
-import { NOT_FOUND, OK } from 'http-status-codes';
+import { OK } from 'http-status-codes';
 import { join } from 'path';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
@@ -25,11 +25,6 @@ router.get('*', ({ url }, res) => {
     }) || acc
   ), null);
 
-  if (!match) {
-    res.status(NOT_FOUND).send('Not found');
-    return;
-  }
-
   const context = {};
 
   const stylesheet = new ServerStyleSheet();
@@ -46,7 +41,9 @@ router.get('*', ({ url }, res) => {
   const manifestPath: string = join(__dirname, jsAssets.find(({ name }) => name === 'manifest').localPath);
   const manifest = readFileSync(manifestPath);
 
-  res.status(OK).render('react', {
+  const statusCode = context.status == null ? OK : context.status;
+
+  res.status(statusCode).render('react', {
     jsassets: jsAssets.filter(({ name }) => name !== 'manifest'),
     cssassets: cssAssets,
     css,
